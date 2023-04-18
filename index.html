@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Phone size</title>
+    <link rel="stylesheet" href="./style/index.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+  </head>
+  <body>
+    <div class="phone">
+      <div class="top"><div class="camera"></div></div>
+      <div class="screen">
+        <div class="pages">
+          <div class="page page1">
+            <h2>Orange</h2>
+            <h1>橘</h1>
+            <div class="orange"></div>
+          </div>
+          <div class="page page2">
+            <h2>Introduction</h2>
+            <p>橘子是芸香科柑桔屬的一種水果。</p>
+          </div>
+          <div class="page page3">
+            <h2>Price</h2>
+            <p>時價：一斤200元。</p>
+          </div>
+        </div>
+      </div>
+      <div class="bottom"><div class="button">▢</div></div>
+    </div>
+
+    <h3 class="status">The "Best" iPhone we've ever made!</h3>
+    <h2 class="phone_name">iPhone5</h2>
+    <div class="buttons">
+      <button class="i5">iPhone5</button>
+      <button class="i5s">iPhone5s</button>
+      <button class="i6">iPhone6</button>
+      <button class="i6s">iPhone6+</button>
+      <button class="wiggle">wiggle</button>
+      <button class="turn">turn around</button>
+    </div>
+
+    <script>
+      button_audio = new Audio(
+        "https://monoame.com/awi_class/ballsound/click14.wav"
+      );
+      screen_audio = new Audio(
+        "https://monoame.com/awi_class/ballsound/click18.wav"
+      );
+      home_audio = new Audio(
+        "https://monoame.com/awi_class/ballsound/click23.wav"
+      );
+      wiggle_audio = new Audio(
+        "https://monoame.com/awi_class/ballsound/phonevi.mp3"
+      );
+
+      $(".i5").click(function (e) {
+        e.preventDefault();
+        $(".phone").css("width", "");
+        $(".screen").css("height", "");
+        $(".phone_name").text($(this).text());
+        button_audio.play();
+      });
+
+      $(".i5s").click(function (e) {
+        e.preventDefault();
+        $(".phone").css("width", "250px");
+        $(".screen").css("height", "330px");
+        $(".phone_name").text($(this).text());
+        button_audio.play();
+      });
+
+      $(".i6").click(function (e) {
+        e.preventDefault();
+        $(".phone").css("width", "270px");
+        $(".screen").css("height", "350px");
+        $(".phone_name").text($(this).text());
+        button_audio.play();
+      });
+
+      $(".i6s").click(function (e) {
+        e.preventDefault();
+        $(".phone").css("width", "280px");
+        $(".screen").css("height", "380px");
+        $(".phone_name").text($(this).text());
+        button_audio.play();
+      });
+
+      let page = 0;
+      $(".screen").click(function (e) {
+        e.preventDefault();
+        page += 1;
+        if (page > 2) {
+          page = 0;
+        }
+        $(".pages").css("left", "-" + page * 100 + "%");
+        screen_audio.play();
+      });
+
+      $(".button").click(function (e) {
+        e.preventDefault();
+        page = 0;
+        $(".pages").css("left", "-" + page * 100 + "%");
+        home_audio.play();
+      });
+
+      let turn_time = 0;
+      $(".turn").click(function (e) {
+        e.preventDefault();
+        turn_time += 1;
+        $(".phone").css("transform", "rotate(" + turn_time * 360 + "deg)");
+      });
+
+      let wiggle_time = 21;
+      $(".wiggle").click(function (e) {
+        e.preventDefault();
+        wiggle_time = 0;
+        wiggle_audio.play();
+      });
+
+      setInterval(function () {
+        console.log(wiggle_time);
+        if (wiggle_time <= 20) {
+          wiggle_time += 1;
+          if (wiggle_time % 2 == 0) {
+            $(".phone").css("left", "-30px");
+          } else {
+            $(".phone").css("left", "30px");
+          }
+        }
+        if (wiggle_time == 21) {
+          $(".phone").css("left", "0px");
+        }
+      }, 60);
+    </script>
+  </body>
+</html>
